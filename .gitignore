@@ -3,7 +3,7 @@ node_modules/
 
 # Server
 backend/node_modules/
-backendend/config.env
+backendend/.env
 
 # Client
 frontend/node_modules/
