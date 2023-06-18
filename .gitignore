@@ -1,12 +1,13 @@
 node_modules/
+.env
 
 # Server
 backend/node_modules/
 backendend/config.env
 
 # Client
-frondend/node_modules/
-frondend/.env
+frontend/node_modules/
+frontend/.env
 
 # IDE / Editor specific files
 .vscode/
