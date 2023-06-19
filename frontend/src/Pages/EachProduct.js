@@ -3,9 +3,15 @@ import React, { useEffect, useState } from "react";
 // import products from "../data/products.js";
 import axios from "axios";
 
+//Redux
+import { useDispatch } from "react-redux";
+import { addToCart } from "../ReduxStore/cartSlice";
+
 export default function EachProduct() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const dispatch = useDispatch();
 
   const { id } = useParams();
 
@@ -47,7 +53,14 @@ export default function EachProduct() {
       <p className="text-xl">
         <span>Price :</span> {prod.price} $
       </p>
-      <button className="bg-sky-400 p-1 text-white">Add to Cart</button>
+      <button
+        className="bg-sky-400 p-1 text-white"
+        onClick={() => {
+          dispatch(addToCart(prod));
+        }}
+      >
+        Add to Cart
+      </button>
       <p>{prod.description}...</p>
       <p className="text-yellow-500 text-2xl">
         {" "}

@@ -3,7 +3,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+//Redux
+import { useDispatch } from "react-redux";
+import { addToCart } from "../ReduxStore/cartSlice";
+
 export default function Products() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [products, setProducts] = useState([]);
@@ -77,7 +82,11 @@ export default function Products() {
               <button
                 className="bg-sky-400 p-1 text-white"
                 onClick={() => {
-                  alert("hello");
+                  // alert("hello");
+                  const productToAdd = products.filter(
+                    (product) => product._id === prod._id
+                  )[0];
+                  dispatch(addToCart(productToAdd));
                 }}
               >
                 Add to Cart
