@@ -5,7 +5,7 @@ import axios from "axios";
 
 //Redux
 import { useDispatch } from "react-redux";
-import { addToCart } from "../ReduxStore/cartSlice";
+import { addToCart } from "../Store/cartSlice";
 
 export default function EachProduct() {
   const [products, setProducts] = useState([]);
@@ -61,7 +61,7 @@ export default function EachProduct() {
       >
         Add to Cart
       </button>
-      <p>{prod.description}...</p>
+      <p className="max-w-[600px]">{prod.description}...</p>
       <p className="text-yellow-500 text-2xl">
         {" "}
         &#9733;{" "}
