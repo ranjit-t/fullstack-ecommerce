@@ -32,6 +32,13 @@ export default function Products() {
                 </p>
                 <p>{prod.description.slice(0, 50)}...</p>
               </div>
+              <p className="text-yellow-500 text-xl">
+                {" "}
+                &#9733;{" "}
+                <span className="text-sm">
+                  {prod.rating}/5 - {prod.numReviews} Reviews
+                </span>
+              </p>
               <button
                 className="bg-sky-400 p-1 text-white"
                 onClick={() => {
