@@ -5,6 +5,7 @@ import axios from "axios";
 
 export default function EachProduct() {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const { id } = useParams();
 
@@ -13,8 +14,10 @@ export default function EachProduct() {
       try {
         const result = await axios.get("http://localhost:5000/products");
         setProducts(result.data);
+        setLoading(false);
       } catch (e) {
         setProducts([]);
+        setLoading(false);
       }
     };
     getProducts();
@@ -22,10 +25,18 @@ export default function EachProduct() {
 
   const prod = products.filter((prod) => prod._id === id)[0];
 
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center mt-4">
+        ...Loading
+      </div>
+    );
+  }
+
   if (products.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center mt-4">
-        No products
+        No product Found
       </div>
     );
   }

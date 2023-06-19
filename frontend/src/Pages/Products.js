@@ -7,18 +7,29 @@ export default function Products() {
   const navigate = useNavigate();
 
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getProducts = async () => {
       try {
         const result = await axios.get("http://localhost:5000/products");
         setProducts(result.data);
+        setLoading(false);
       } catch (e) {
         setProducts([]);
+        setLoading(false);
       }
     };
     getProducts();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center mt-4">
+        ...Loading
+      </div>
+    );
+  }
 
   if (products.length === 0) {
     return (
