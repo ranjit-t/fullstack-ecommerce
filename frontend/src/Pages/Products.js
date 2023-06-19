@@ -1,9 +1,33 @@
-import React from "react";
-import products from "../data/products.js";
+import React, { useEffect, useState } from "react";
+// import products from "../data/products.js";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Products() {
   const navigate = useNavigate();
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const result = await axios.get("http://localhost:5000/products");
+        setProducts(result.data);
+      } catch (e) {
+        setProducts([]);
+      }
+    };
+    getProducts();
+  }, []);
+
+  if (products.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center mt-4">
+        No products
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col items-center justify-center mt-4">
       {" "}
