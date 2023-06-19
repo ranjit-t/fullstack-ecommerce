@@ -7,8 +7,8 @@ export default function Header() {
       <NavLink className="nav-link p-2" to="/">
         Products
       </NavLink>
-      <NavLink className="nav-link p-2" to="/contact">
-        Contact
+      <NavLink className="nav-link p-2" to="/cart">
+        Cart
       </NavLink>
     </div>
   );
