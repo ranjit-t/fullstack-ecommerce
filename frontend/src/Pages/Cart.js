@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 //Redux
 import { useSelector } from "react-redux";
 
 export default function Cart() {
+  const navigate = useNavigate();
+
   const cartItems = useSelector((state) => state.cart.cartItems);
   const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
@@ -23,8 +27,8 @@ export default function Cart() {
     );
   }
   return (
-    <div>
-      <div className="flex flex-col items-center justify-center my-4">
+    <div className="pb-20">
+      <div className="flex flex-col items-center justify-center my-4 text-xl font-bold">
         Cart Items
       </div>
       <table className="flex flex-col gap-y-4">
@@ -38,9 +42,18 @@ export default function Cart() {
         <tbody className="flex flex-col justify-center gap-y-4">
           {cartItems.map((item) => {
             return (
-              <tr key={item._id} className="flex justify-evenly w-[100%] ">
-                <td className="w-1/3 text-center">
-                  {item.name.slice(0, 20)}...{" "}
+              <tr
+                key={item._id}
+                className="flex justify-evenly items-center w-[100%] border border-grey-400 p-2"
+              >
+                <td
+                  className="w-1/3 text-center flex flex-col justify-center items-center cursor-pointer "
+                  onClick={() => {
+                    navigate(`/products/${item._id}`);
+                  }}
+                >
+                  <img src={item.image} alt={item.name} width="100px" />{" "}
+                  <p>{item.name.slice(0, 30)}...</p>
                 </td>
                 <td className="w-1/3 text-center">{item.price}</td>
                 <td className="w-1/3 text-center">{item.quantity}</td>
@@ -49,8 +62,11 @@ export default function Cart() {
           })}
         </tbody>
       </table>
-      <div className="mt-4 text-xl font-bold">
-        <span>{`Total : ${totalPrice} €`}</span>
+      <div className="mt-4 text-lg font-bold flex justify-evenly">
+        <p>
+          <span>{`Total : ${totalPrice} €`}</span>
+        </p>
+        <button className="bg-yellow-500 px-2 text-white hover:bg-yellow-600">{`Check Out >>`}</button>
       </div>
     </div>
   );

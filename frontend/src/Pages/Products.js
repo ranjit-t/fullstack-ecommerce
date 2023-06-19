@@ -45,8 +45,7 @@ export default function Products() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center mt-4 pb-12">
-      {" "}
+    <div className="flex flex-col items-center justify-center mt-4 pb-20">
       <div className="flex flex-wrap max-w-[850px] items-center justify-center ">
         {products.map((prod) => {
           return (

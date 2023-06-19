@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 export default function Header() {
   return (
-    <div className="flex justify-evenly mt-4">
+    <div className="flex justify-evenly  bg-gray-200 p-6">
       <a className="text-2xl font-bold text-sky-600 cursor-pointer" href="/">
         KARMAPP<sup className="text-sm">Shop</sup>
       </a>
