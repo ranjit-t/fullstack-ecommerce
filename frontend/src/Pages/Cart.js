@@ -53,7 +53,7 @@ export default function Cart() {
                   <img src={item.image} alt={item.name} width="100px" />{" "}
                   <p>{item.name.slice(0, 30)}...</p>
                 </td>
-                <td className="w-1/3 text-center">{item.price}</td>
+                <td className="w-1/3 text-center">{item.price} €</td>
                 <td className="w-1/3 text-center">{item.quantity}</td>
               </tr>
             );

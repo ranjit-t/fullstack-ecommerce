@@ -79,7 +79,7 @@ export default function Products() {
                 </span>
               </p>
               <button
-                className="bg-sky-400 p-1 text-white"
+                className="bg-sky-400 p-1 text-white active:bg-sky-600"
                 onClick={() => {
                   // alert("hello");
                   const productToAdd = products.filter(

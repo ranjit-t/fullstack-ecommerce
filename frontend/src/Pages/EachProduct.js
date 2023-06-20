@@ -47,7 +47,7 @@ export default function EachProduct() {
     );
   }
   return (
-    <div className="flex flex-col items-center justify-center gap-y-8">
+    <div className="flex flex-col items-center justify-center gap-y-8 pb-4">
       <p className="mt-4 text-2xl font-bold">{prod.name}</p>
       <img src={prod.image} alt={prod.name} width="400px" height="400px" />
       <p className="text-xl">
