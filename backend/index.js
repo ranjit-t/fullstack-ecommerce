@@ -5,6 +5,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 //Routes
 import userRoute from "./routes/users-route.js";
+import shopRoute from "./routes/shop-route.js";
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/user", userRoute);
+app.use("/shop", shopRoute);
 
 app.get("/products", (req, res) => {
   res.json(products);
