@@ -28,9 +28,7 @@ export default function Cart() {
   }
   return (
     <div className="pb-20">
-      <div className="flex flex-col items-center justify-center my-4 text-xl font-bold">
-        Cart Items
-      </div>
+      <div className="my-4 text-xl font-bold">Cart Items</div>
       <table className="flex flex-col gap-y-4">
         <thead className="flex justify-center ">
           <tr className="flex justify-evenly  w-[100%] border border-grey-400">

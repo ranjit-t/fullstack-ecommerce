@@ -2,6 +2,9 @@ import express from "express";
 import products from "./data/products.js";
 import dotenv from "dotenv";
 import cors from "cors";
+import mongoose from "mongoose";
+//Routes
+import userRoute from "./routes/users-route.js";
 
 const app = express();
 
@@ -10,9 +13,20 @@ app.use(cors());
 
 dotenv.config();
 
+mongoose
+  .connect(process.env.URI)
+  .then(() => {
+    console.log("connected to mongodb");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
+
+app.use("/user", userRoute);
 
 app.get("/products", (req, res) => {
   res.json(products);
