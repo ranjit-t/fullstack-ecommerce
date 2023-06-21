@@ -16,6 +16,7 @@ import Signup from "./Pages/Signup";
 function App() {
   // const [loading, setLoading] = useState(true);
   const [isLogged, setIsLogged] = useState(false);
+  const [curUser, setCurUser] = useState({});
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("login-token"));
@@ -24,8 +25,9 @@ function App() {
         .post("http://localhost:5000/user/loginverify", {
           token,
         })
-        .then((data) => {
-          console.log(data);
+        .then((response) => {
+          // console.log(data);
+          setCurUser(response.data);
           setIsLogged(true);
           // setLoading(false);
         })
@@ -46,13 +48,21 @@ function App() {
         <Header isLogged={isLogged} setIsLogged={setIsLogged}></Header>
         <Provider store={store}>
           <Routes>
-            <Route path="/" element={<Products></Products>} />
-            <Route path="/products/:id" element={<EachProduct></EachProduct>} />
-            <Route path="/cart" element={<Cart></Cart>} />
+            <Route path="/" element={<Products curUser={curUser}></Products>} />
+            <Route
+              path="/products/:id"
+              element={<EachProduct curUser={curUser}></EachProduct>}
+            />
+            <Route path="/cart" element={<Cart curUser={curUser}></Cart>} />
             <Route
               path="/login"
               element={
-                <Login isLogged={isLogged} setIsLogged={setIsLogged}></Login>
+                <Login
+                  isLogged={isLogged}
+                  setIsLogged={setIsLogged}
+                  curUser={curUser}
+                  setCurUser={setCurUser}
+                ></Login>
               }
             ></Route>
             <Route path="/signup" element={<Signup></Signup>}></Route>

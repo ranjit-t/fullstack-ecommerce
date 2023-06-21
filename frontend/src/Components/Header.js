@@ -23,7 +23,9 @@ export default function Header({ isLogged, setIsLogged }) {
             className="nav-link p-2 cursor-pointer"
             onClick={() => {
               localStorage.removeItem("login-token");
+              localStorage.removeItem("cart");
               setIsLogged(false);
+              window.location.reload();
             }}
           >
             Logout

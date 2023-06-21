@@ -1,31 +1,25 @@
 import React, { useEffect, useState } from "react";
-// import products from "../data/products.js";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { getAllProducts } from "../Utils/GetAllProducts";
+import { AddToCart } from "../Utils/ModifCartItems";
 
-//Redux
-import { useDispatch } from "react-redux";
-import { addToCart } from "../Store/cartSlice";
-
-export default function Products() {
-  const dispatch = useDispatch();
+export default function Products({ curUser }) {
   const navigate = useNavigate();
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getProducts = async () => {
+    const fetchProducts = async () => {
       try {
-        const result = await axios.get("http://localhost:5000/products");
-        setProducts(result.data);
+        const response = await getAllProducts();
+        setProducts(response);
         setLoading(false);
       } catch (e) {
-        setProducts([]);
         setLoading(false);
       }
     };
-    getProducts();
+    fetchProducts();
   }, []);
 
   if (loading) {
@@ -81,11 +75,11 @@ export default function Products() {
               <button
                 className="bg-sky-400 p-1 text-white active:bg-sky-600"
                 onClick={() => {
-                  // alert("hello");
                   const productToAdd = products.filter(
                     (product) => product._id === prod._id
                   )[0];
-                  dispatch(addToCart(productToAdd));
+                  productToAdd.userEmail = curUser?.email;
+                  AddToCart(curUser?.email, productToAdd);
                 }}
               >
                 Add to Cart

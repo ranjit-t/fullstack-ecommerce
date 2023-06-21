@@ -69,7 +69,7 @@ const loginController = async (req, res) => {
     res.cookie("token", token, { httpOnly: true });
 
     // Return a success message
-    res.json({ message: "Login successful", token: token });
+    res.json({ message: "Login successful", token: token, email: email });
   } catch (err) {
     res.status(500).json({ error: "An error occurred" });
   }
@@ -79,11 +79,14 @@ const loginVerifyController = (req, res) => {
   const { token } = req.body;
   try {
     const decodedToken = jwt.verify(token, "mysecrettobescret");
+
     var currentTimestamp = new Date().getTime() / 1000;
     var tokenIsNotExpired = decodedToken.exp > currentTimestamp;
 
     if (tokenIsNotExpired) {
-      return res.status(200).json({ message: "token verified" });
+      return res
+        .status(200)
+        .json({ message: "token verified", email: decodedToken.email });
     } else {
       return res.status(401).json({ error: "token expired" });
     }

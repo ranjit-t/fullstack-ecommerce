@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+// import getCartItems from "../Utils/GetCartItems";
+import { AddToCart, RemoveFromCart } from "../Utils/ModifCartItems";
 
-//Redux
-import { useSelector } from "react-redux";
-
-export default function Cart() {
+export default function Cart({ curUser }) {
   const navigate = useNavigate();
 
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const [cartItems, setCartItems] = useState([]);
+  const [cartChanged, setcartChanged] = useState(false);
+
+  useEffect(() => {
+    setCartItems(
+      localStorage.getItem("cart")
+        ? JSON.parse(localStorage.getItem("cart"))
+        : []
+    );
+  }, [curUser, cartChanged]);
+
   const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
     const price = cartItems.reduce(
@@ -15,7 +24,7 @@ export default function Cart() {
       0
     );
     setTotalPrice(price.toFixed(2));
-  }, [cartItems]);
+  }, [cartItems, cartChanged]);
   if (cartItems.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center mt-4">
@@ -54,7 +63,29 @@ export default function Cart() {
                   <p>{item.name.slice(0, 30)}...</p>
                 </td>
                 <td className="w-1/3 text-center">{item.price} €</td>
-                <td className="w-1/3 text-center">{item.quantity}</td>
+                <td className="w-1/3 text-center">
+                  <button
+                    className="bg-sky-400 px-2 active:bg-sky-600 mx-2"
+                    onClick={async () => {
+                      item.userEmail = curUser?.email;
+                      await RemoveFromCart(curUser?.email, item);
+                      setcartChanged((prev) => !prev);
+                    }}
+                  >
+                    -
+                  </button>
+                  {item.quantity}
+                  <button
+                    className="bg-sky-400 px-2 active:bg-sky-600 mx-2"
+                    onClick={async () => {
+                      item.userEmail = curUser?.email;
+                      await AddToCart(curUser?.email, item);
+                      setcartChanged((prev) => !prev);
+                    }}
+                  >
+                    +
+                  </button>
+                </td>
               </tr>
             );
           })}

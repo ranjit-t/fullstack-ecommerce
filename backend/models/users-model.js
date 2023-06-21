@@ -10,6 +10,7 @@ const newUserSchema = mongoose.Schema({
       name: { type: String },
       price: { type: String },
       quantity: { type: Number },
+      image: { type: String },
     },
   ],
   orderedItems: [

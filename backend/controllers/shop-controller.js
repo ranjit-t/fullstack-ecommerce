@@ -7,6 +7,7 @@ import NewUser from "../models/users-model.js";
 
 const cartController = async (req, res) => {
   const { email, cartItems } = req.body;
+  console.log(email, cartItems);
 
   try {
     const updatedUser = await NewUser.findOneAndUpdate(
@@ -27,4 +28,20 @@ const cartController = async (req, res) => {
   }
 };
 
-export { cartController };
+const getCartController = async (req, res) => {
+  const { email } = req.body;
+  console.log(req.body);
+  if (!email) {
+    return res.status(404).json({ error: "No email Found" });
+  }
+
+  try {
+    const foundItems = await NewUser.find({ email });
+    return res.status(200).json({ cartItems: foundItems[0].cartItems });
+  } catch (error) {
+    console.error("Error replacing cart items:", error);
+    return res.status(500).json({ error: "An error occurred" });
+  }
+};
+
+export { cartController, getCartController };

@@ -5,8 +5,12 @@ router.use(express.json());
 
 //Controllers
 
-import { cartController } from "../controllers/shop-controller.js";
+import {
+  cartController,
+  getCartController,
+} from "../controllers/shop-controller.js";
 
 router.post("/addcartitems", cartController);
+router.post("/getcartitems", getCartController);
 
 export default router;

@@ -1,17 +1,12 @@
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-// import products from "../data/products.js";
 import axios from "axios";
 
-//Redux
-import { useDispatch } from "react-redux";
-import { addToCart } from "../Store/cartSlice";
+import { AddToCart } from "../Utils/ModifCartItems";
 
-export default function EachProduct() {
+export default function EachProduct({ curUser }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const dispatch = useDispatch();
 
   const { id } = useParams();
 
@@ -47,7 +42,7 @@ export default function EachProduct() {
     );
   }
   return (
-    <div className="flex flex-col items-center justify-center gap-y-8 pb-4">
+    <div className="flex flex-col items-center justify-center gap-y-8 pb-20">
       <p className="mt-4 text-2xl font-bold">{prod.name}</p>
       <img src={prod.image} alt={prod.name} width="400px" height="400px" />
       <p className="text-xl">
@@ -56,7 +51,8 @@ export default function EachProduct() {
       <button
         className="bg-sky-400 p-1 text-white"
         onClick={() => {
-          dispatch(addToCart(prod));
+          prod.userEmail = curUser?.email;
+          AddToCart(curUser?.email, prod);
         }}
       >
         Add to Cart
