@@ -15,6 +15,8 @@ export default function Login({ isLogged, setIsLogged, setCurUser, curUser }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    //Login
     try {
       const response = await axios.post("http://localhost:5000/user/login", {
         email,
@@ -24,13 +26,26 @@ export default function Login({ isLogged, setIsLogged, setCurUser, curUser }) {
       setCurUser(data);
       localStorage.setItem("login-token", JSON.stringify(data.token));
 
+      //Fetching Cart Items from Server
       const fetchData = async () => {
         try {
           const cartItemsdata = await getCartItems(email);
           if (cartItemsdata.length > 0) {
             localStorage.setItem("cart", JSON.stringify(cartItemsdata));
           } else {
-            localStorage.setItem("cart", JSON.stringify([]));
+            //Taking Cart Items from LocalStorage to Server
+            if (localStorage.getItem("cart")) {
+              axios
+                .post("http://localhost:5000/shop/addcartitems", {
+                  email: email,
+                  cartItems: JSON.parse(localStorage.getItem("cart")),
+                })
+                .catch((e) => {
+                  console.log(e.response.data);
+                });
+            } else {
+              localStorage.setItem("cart", JSON.stringify([]));
+            }
           }
           setIsLogged(true);
         } catch (error) {}
