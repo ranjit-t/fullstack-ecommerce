@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { AddToCart } from "../Utils/ModifCartItems";
 
-export default function EachProduct({ curUser }) {
+export default function EachProduct({ curUser, setcartChanged }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -50,9 +50,10 @@ export default function EachProduct({ curUser }) {
       </p>
       <button
         className="bg-sky-400 p-1 text-white"
-        onClick={() => {
+        onClick={async () => {
           prod.userEmail = curUser?.email;
-          AddToCart(curUser?.email, prod);
+          await AddToCart(curUser?.email, prod);
+          setcartChanged((prev) => !prev);
         }}
       >
         Add to Cart

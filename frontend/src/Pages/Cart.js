@@ -3,11 +3,10 @@ import { useNavigate } from "react-router-dom";
 // import getCartItems from "../Utils/GetCartItems";
 import { AddToCart, RemoveFromCart } from "../Utils/ModifCartItems";
 
-export default function Cart({ curUser }) {
+export default function Cart({ curUser, cartChanged, setcartChanged }) {
   const navigate = useNavigate();
 
   const [cartItems, setCartItems] = useState([]);
-  const [cartChanged, setcartChanged] = useState(false);
 
   useEffect(() => {
     setCartItems(
@@ -25,6 +24,7 @@ export default function Cart({ curUser }) {
     );
     setTotalPrice(price.toFixed(2));
   }, [cartItems, cartChanged]);
+
   if (cartItems.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center mt-4">

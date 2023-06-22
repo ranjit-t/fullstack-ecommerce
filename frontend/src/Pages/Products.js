@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getAllProducts } from "../Utils/GetAllProducts";
 import { AddToCart } from "../Utils/ModifCartItems";
 
-export default function Products({ curUser }) {
+export default function Products({ curUser, setcartChanged }) {
   const navigate = useNavigate();
 
   const [products, setProducts] = useState([]);
@@ -74,12 +74,13 @@ export default function Products({ curUser }) {
               </p>
               <button
                 className="bg-sky-400 p-1 text-white active:bg-sky-600"
-                onClick={() => {
-                  const productToAdd = products.filter(
-                    (product) => product._id === prod._id
-                  )[0];
-                  productToAdd.userEmail = curUser?.email;
-                  AddToCart(curUser?.email, productToAdd);
+                onClick={async () => {
+                  // const productToAdd = products.filter(
+                  //   (product) => product._id === prod._id
+                  // )[0];
+                  prod.userEmail = curUser?.email;
+                  await AddToCart(curUser?.email, prod);
+                  setcartChanged((prev) => !prev);
                 }}
               >
                 Add to Cart

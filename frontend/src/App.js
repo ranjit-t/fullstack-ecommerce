@@ -17,6 +17,7 @@ function App() {
   // const [loading, setLoading] = useState(true);
   const [isLogged, setIsLogged] = useState(false);
   const [curUser, setCurUser] = useState({});
+  const [cartChanged, setcartChanged] = useState(false);
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("login-token"));
@@ -45,15 +46,42 @@ function App() {
   return (
     <div className="App relative min-h-screen">
       <BrowserRouter>
-        <Header isLogged={isLogged} setIsLogged={setIsLogged}></Header>
+        <Header
+          isLogged={isLogged}
+          setIsLogged={setIsLogged}
+          curUser={curUser}
+          cartChanged={cartChanged}
+        ></Header>
         <Provider store={store}>
           <Routes>
-            <Route path="/" element={<Products curUser={curUser}></Products>} />
+            <Route
+              path="/"
+              element={
+                <Products
+                  curUser={curUser}
+                  setcartChanged={setcartChanged}
+                ></Products>
+              }
+            />
             <Route
               path="/products/:id"
-              element={<EachProduct curUser={curUser}></EachProduct>}
+              element={
+                <EachProduct
+                  curUser={curUser}
+                  setcartChanged={setcartChanged}
+                ></EachProduct>
+              }
             />
-            <Route path="/cart" element={<Cart curUser={curUser}></Cart>} />
+            <Route
+              path="/cart"
+              element={
+                <Cart
+                  curUser={curUser}
+                  cartChanged={cartChanged}
+                  setcartChanged={setcartChanged}
+                ></Cart>
+              }
+            />
             <Route
               path="/login"
               element={
