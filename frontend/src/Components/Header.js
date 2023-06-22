@@ -15,7 +15,7 @@ export default function Header({
         ? JSON.parse(localStorage.getItem("cart"))
         : []
     );
-  }, [curUser, cartChanged]);
+  }, [curUser, cartChanged, cartItems]);
 
   const [totalQuantity, setTotalQuantity] = useState(0);
   useEffect(() => {
