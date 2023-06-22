@@ -64,27 +64,42 @@ export default function Cart({ curUser, cartChanged, setcartChanged }) {
                 </td>
                 <td className="w-1/3 text-center">{item.price} €</td>
                 <td className="w-1/3 text-center">
-                  <button
-                    className="bg-sky-400 px-2 active:bg-sky-600 mx-2"
-                    onClick={async () => {
-                      item.userEmail = curUser?.email;
-                      await RemoveFromCart(curUser?.email, item);
-                      setcartChanged((prev) => !prev);
-                    }}
-                  >
-                    -
-                  </button>
-                  {item.quantity}
-                  <button
-                    className="bg-sky-400 px-2 active:bg-sky-600 mx-2"
-                    onClick={async () => {
-                      item.userEmail = curUser?.email;
-                      await AddToCart(curUser?.email, item);
-                      setcartChanged((prev) => !prev);
-                    }}
-                  >
-                    +
-                  </button>
+                  <div>
+                    <div>
+                      <button
+                        className="bg-sky-400 px-2 active:bg-sky-600 mx-2"
+                        onClick={async () => {
+                          item.userEmail = curUser?.email;
+                          await RemoveFromCart(curUser?.email, item, false);
+                          setcartChanged((prev) => !prev);
+                        }}
+                      >
+                        -
+                      </button>
+                      {item.quantity}
+                      <button
+                        className="bg-sky-400 px-2 active:bg-sky-600 mx-2"
+                        onClick={async () => {
+                          item.userEmail = curUser?.email;
+                          await AddToCart(curUser?.email, item);
+                          setcartChanged((prev) => !prev);
+                        }}
+                      >
+                        +
+                      </button>
+                    </div>
+                    <div className="mt-2 text-red-400 active:text-red-600">
+                      <button
+                        onClick={async () => {
+                          item.userEmail = curUser?.email;
+                          await RemoveFromCart(curUser?.email, item, true);
+                          setcartChanged((prev) => !prev);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
                 </td>
               </tr>
             );

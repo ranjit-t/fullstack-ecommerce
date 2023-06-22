@@ -37,7 +37,7 @@ export const AddToCart = async (email, productToAdd) => {
   }
 };
 
-export const RemoveFromCart = async (email, productToAdd) => {
+export const RemoveFromCart = async (email, productToAdd, removeOption) => {
   let cartItems;
   try {
     const cartItemsdata = await getCartItems(email);
@@ -51,7 +51,9 @@ export const RemoveFromCart = async (email, productToAdd) => {
   const existingItem = cartItems.filter(
     (item) => item._id === productToAdd._id
   );
-  if (existingItem[0].quantity > 1) {
+  if (removeOption === true) {
+    cartItems = cartItems.filter((item) => item._id !== productToAdd._id);
+  } else if (existingItem[0].quantity > 1) {
     cartItems.map((item) => item._id === productToAdd._id && item.quantity--);
   } else if (existingItem[0].quantity === 1) {
     cartItems = cartItems.filter((item) => item._id !== productToAdd._id);
