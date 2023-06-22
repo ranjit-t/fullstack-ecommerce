@@ -83,6 +83,90 @@ const products = [
     rating: 4,
     numReviews: 12,
   },
+  {
+    _id: "7",
+    name: "Beats Studio3 Wireless Over-Ear Headphones",
+    image:
+      "https://images.unsplash.com/photo-1638803782506-d975a6809f43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1160&q=80",
+    description:
+      "Enjoy immersive sound and wireless freedom with the Beats Studio3 Wireless headphones. With adaptive noise cancellation and long battery life, they deliver a premium listening experience.",
+    brand: "Beats",
+    category: "Electronics",
+    price: 299.99,
+    countInStock: 8,
+    rating: 4.2,
+    numReviews: 15,
+  },
+  {
+    _id: "8",
+    name: "Samsung QLED 4K Ultra HD Smart TV",
+    image:
+      "https://images.unsplash.com/photo-1593305841991-05c297ba4575?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1357&q=80",
+    description:
+      "Upgrade your entertainment system with the Samsung QLED 4K Ultra HD Smart TV. It features stunning picture quality, a sleek design, and smart capabilities for an enhanced viewing experience.",
+    brand: "Samsung",
+    category: "Electronics",
+    price: 1499.99,
+    countInStock: 3,
+    rating: 4.8,
+    numReviews: 20,
+  },
+  {
+    _id: "9",
+    name: "Sony WH-1000XM4 Wireless Noise-Canceling Headphones",
+    image:
+      "https://images.unsplash.com/photo-1594075410664-00e61ae442dc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    description:
+      "Immerse yourself in music with the Sony WH-1000XM4 Wireless Noise-Canceling Headphones. They offer industry-leading noise cancellation and exceptional sound quality for a premium listening experience.",
+    brand: "Sony",
+    category: "Electronics",
+    price: 349.99,
+    countInStock: 6,
+    rating: 4.6,
+    numReviews: 18,
+  },
+  {
+    _id: "10",
+    name: "Dell XPS 15 Laptop",
+    image:
+      "https://images.unsplash.com/photo-1567521463850-4939134bcd4a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
+    description:
+      "Experience high-performance computing with the Dell XPS 15 Laptop. It boasts a stunning 15-inch display, powerful hardware, and a sleek, compact design for productivity on the go.",
+    brand: "Dell",
+    category: "Electronics",
+    price: 1699.99,
+    countInStock: 4,
+    rating: 4.5,
+    numReviews: 14,
+  },
+  {
+    _id: "11",
+    name: "GoPro HERO9 Black",
+    image:
+      "https://images.unsplash.com/photo-1643110496210-3dd117022ea1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1446&q=80",
+    description:
+      "Capture your adventures in stunning detail with the GoPro HERO9 Black. It features 5K video, 20MP photos, and advanced stabilization, making it the ultimate action camera.",
+    brand: "GoPro",
+    category: "Electronics",
+    price: 449.99,
+    countInStock: 9,
+    rating: 4.9,
+    numReviews: 22,
+  },
+  {
+    _id: "12",
+    name: "Nikon Z7 II Mirrorless Camera",
+    image:
+      "https://images.unsplash.com/photo-1541690663428-b99fc611c419?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1467&q=80",
+    description:
+      "Capture stunning images with the Nikon Z7 II Mirrorless Camera. It features a high-resolution sensor, advanced autofocus system, and 4K video capabilities, providing professional-level performance for photography enthusiasts.",
+    brand: "Nikon",
+    category: "Electronics",
+    price: 2499.99,
+    countInStock: 3,
+    rating: 4.8,
+    numReviews: 22,
+  },
 ];
 
 export default products;
