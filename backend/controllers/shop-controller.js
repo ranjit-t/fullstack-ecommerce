@@ -119,7 +119,7 @@ const getOrderController = async (req, res) => {
   console.log(email);
   try {
     const foundItems = await NewUser.find({ email });
-    return res.status(200).json({ cartItems: foundItems[0].orders });
+    return res.status(200).json({ orders: foundItems[0].orders });
   } catch (error) {
     console.error("Error replacing cart items:", error);
     return res.status(500).json({ error: "An error occurred" });
