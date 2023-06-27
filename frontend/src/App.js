@@ -14,6 +14,7 @@ import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import CheckInProcess from "./Pages/CheckInProcess";
 import Profile from "./Pages/Profile";
+import EachOrder from "./Pages/EachOrder";
 
 function App() {
   const [isLogged, setIsLogged] = useState(false);
@@ -99,6 +100,7 @@ function App() {
                 <Profile isLogged={isLogged} curUser={curUser}></Profile>
               }
             ></Route>
+            <Route path="/order/:id" element={<EachOrder></EachOrder>} />
             <Route
               path="/login"
               element={
