@@ -12,35 +12,33 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
+import CheckInProcess from "./Pages/CheckInProcess";
+import Profile from "./Pages/Profile";
 
 function App() {
-  // const [loading, setLoading] = useState(true);
   const [isLogged, setIsLogged] = useState(false);
   const [curUser, setCurUser] = useState({});
   const [cartChanged, setcartChanged] = useState(false);
 
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("login-token"));
-    if (token) {
-      axios
-        .post("http://localhost:5000/user/loginverify", {
-          token,
-        })
-        .then((response) => {
-          // console.log(data);
-          setCurUser(response.data);
-          setIsLogged(true);
-          // setLoading(false);
-        })
-        .catch((e) => {
-          console.log(e.response.data);
-          setIsLogged(false);
-          // setLoading(false);
-        });
-    } else {
-      setIsLogged(false);
-      // setLoading(false);
-    }
+    const checkLoginStatus = async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:5000/user/loginverify",
+          {},
+          {
+            withCredentials: true, // Enable sending and receiving cookies
+          }
+        );
+        setCurUser(response.data);
+        setIsLogged(true);
+      } catch (error) {
+        console.log(error.response.data);
+        setIsLogged(false);
+      }
+    };
+
+    checkLoginStatus();
   }, []);
 
   return (
@@ -82,6 +80,25 @@ function App() {
                 ></Cart>
               }
             />
+            {/* <Route
+              path="/shipping"
+              element={<Shippingaddress isLogged={isLogged}></Shippingaddress>}
+            ></Route> */}
+            <Route
+              path="/checkinprocess"
+              element={
+                <CheckInProcess
+                  isLogged={isLogged}
+                  curUser={curUser}
+                ></CheckInProcess>
+              }
+            ></Route>
+            <Route
+              path="/profile"
+              element={
+                <Profile isLogged={isLogged} curUser={curUser}></Profile>
+              }
+            ></Route>
             <Route
               path="/login"
               element={

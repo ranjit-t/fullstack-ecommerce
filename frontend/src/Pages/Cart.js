@@ -106,11 +106,16 @@ export default function Cart({ curUser, cartChanged, setcartChanged }) {
           })}
         </tbody>
       </table>
-      <div className="mt-4 text-lg font-bold flex justify-evenly">
+      <div className="mt-4  font-bold flex justify-evenly">
         <p>
           <span>{`Total : ${totalPrice} €`}</span>
         </p>
-        <button className="bg-yellow-500 px-2 text-white hover:bg-yellow-600">{`Check Out >>`}</button>
+        <button
+          className="bg-yellow-500 px-2 text-white hover:bg-yellow-600"
+          onClick={() => {
+            navigate("/checkinprocess");
+          }}
+        >{`Check Out >>`}</button>
       </div>
     </div>
   );

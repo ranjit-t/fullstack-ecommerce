@@ -13,21 +13,27 @@ const newUserSchema = mongoose.Schema({
       image: { type: String },
     },
   ],
-  orderedItems: [
+  orders: [
     {
-      _id: { type: String },
-      cartItems: [
+      orderID: { type: String },
+      orderItems: [
         {
           _id: { type: String },
           name: { type: String },
           price: { type: String },
           quantity: { type: Number },
+          image: { type: String },
         },
       ],
-      orderId: { type: String },
+      shippingAddress: {
+        address: { type: String },
+        city: { type: String },
+        postal: { type: String },
+      },
       totalPrice: { type: String },
-      orderedAt: { type: Date, default: Date.now },
+      paymentId: { type: String },
       paid: { type: Boolean },
+      paidAt: { type: Date, default: Date.now },
       delivered: { type: Boolean },
       deliveredAt: { type: Date },
     },

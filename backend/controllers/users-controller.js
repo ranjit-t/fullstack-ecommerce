@@ -62,21 +62,27 @@ const loginController = async (req, res) => {
 
     // Generate and sign a JSON Web Token (JWT)
     const token = jwt.sign({ userID: user._id, email }, "mysecrettobescret", {
-      expiresIn: "1h",
+      expiresIn: "1d",
     });
 
     // Set the token as a cookie in the response
-    res.cookie("token", token, { httpOnly: true });
+    res.cookie("jwt", token, {
+      httpOnly: true,
+      secure: true,
+      maxAge: 24 * 60 * 60 * 1000,
+    });
 
     // Return a success message
-    res.json({ message: "Login successful", token: token, email: email });
+    res.json({ message: "Login successful", email: email });
   } catch (err) {
     res.status(500).json({ error: "An error occurred" });
   }
 };
 
 const loginVerifyController = (req, res) => {
-  const { token } = req.body;
+  // const { token } = req.body;
+  let token = req.cookies.jwt;
+  // console.log(token);
   try {
     const decodedToken = jwt.verify(token, "mysecrettobescret");
 
@@ -95,4 +101,20 @@ const loginVerifyController = (req, res) => {
   }
 };
 
-export { signUpController, loginController, loginVerifyController };
+const logOutController = (req, res) => {
+  try {
+    res.cookie("jwt", "", { httpOnly: true, maxAge: new Date(0) });
+
+    // Return a success message
+    res.json({ message: "Logout successfully" });
+  } catch (err) {
+    res.status(500).json({ error: "An error occurred" });
+  }
+};
+
+export {
+  signUpController,
+  loginController,
+  loginVerifyController,
+  logOutController,
+};

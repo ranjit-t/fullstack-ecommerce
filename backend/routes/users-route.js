@@ -9,6 +9,7 @@ import {
   signUpController,
   loginController,
   loginVerifyController,
+  logOutController,
 } from "../controllers/users-controller.js";
 
 //
@@ -22,5 +23,6 @@ router.post("/signup", signUpController);
 router.post("/login", loginController);
 
 router.post("/loginverify", loginVerifyController);
+router.get("/logout", logOutController);
 
 export default router;

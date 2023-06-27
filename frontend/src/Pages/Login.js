@@ -18,13 +18,18 @@ export default function Login({ isLogged, setIsLogged, setCurUser, curUser }) {
 
     //Login
     try {
-      const response = await axios.post("http://localhost:5000/user/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "http://localhost:5000/user/login",
+        {
+          email,
+          password,
+        },
+        {
+          withCredentials: true, // Enable sending and receiving cookies
+        }
+      );
       const { data } = response;
       setCurUser(data);
-      localStorage.setItem("login-token", JSON.stringify(data.token));
 
       //Fetching Cart Items from Server
       const fetchData = async () => {

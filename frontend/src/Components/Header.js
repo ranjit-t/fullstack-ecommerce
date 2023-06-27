@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import { NavLink } from "react-router-dom";
 export default function Header({
@@ -23,6 +24,21 @@ export default function Header({
     setTotalQuantity(qty);
   }, [cartItems, cartChanged, curUser]);
 
+  const handleLogout = () => {
+    axios
+      .get("http://localhost:5000/user/logout", {
+        withCredentials: true, // Enable sending and receiving cookies
+      })
+      .then((response) => {
+        localStorage.removeItem("cart");
+        setIsLogged(false);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error("Logout error:", error);
+      });
+  };
+
   return (
     <div className="flex justify-evenly  bg-gray-200 p-6">
       <a className="text-2xl font-bold text-sky-600 cursor-pointer" href="/">
@@ -35,6 +51,11 @@ export default function Header({
         <NavLink className="nav-link p-2 cursor-pointer" to="/cart">
           Cart <sup>{totalQuantity}</sup>
         </NavLink>
+        {isLogged && (
+          <NavLink className="nav-link p-2 cursor-pointer" to="/profile">
+            Profile
+          </NavLink>
+        )}
         {!isLogged && (
           <NavLink className="nav-link p-2 cursor-pointer" to="/login">
             Login
@@ -44,10 +65,7 @@ export default function Header({
           <button
             className="nav-link p-2 cursor-pointer"
             onClick={() => {
-              localStorage.removeItem("login-token");
-              localStorage.removeItem("cart");
-              setIsLogged(false);
-              window.location.reload();
+              handleLogout();
             }}
           >
             Logout
