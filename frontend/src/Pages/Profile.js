@@ -15,8 +15,8 @@ export default function Profile({ curUser }) {
             withCredentials: true, // Enable sending and receiving cookies
           }
         );
-        setOrders(response.data);
-        console.log(response.data);
+        setOrders(response.data.orders);
+        console.log(response.data.orders);
       } catch (error) {
         console.log(error.response.data);
         setOrders([]);
@@ -26,5 +26,18 @@ export default function Profile({ curUser }) {
     checkLoginStatus();
   }, [curUser]);
 
-  return <div>Profile</div>;
+  return (
+    <div>
+      <p>Profile</p>
+      <div>
+        {orders.map((order) => {
+          return (
+            <div>
+              <p>num of items = {order.orderItems.length}</p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 }
